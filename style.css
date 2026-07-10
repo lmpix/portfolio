@@ -1,0 +1,406 @@
+@font-face {
+  font-family: 'PixelArabic';
+  src: url('fonts/ar-pixel.ttf') format('truetype');
+}
+
+/* ==========================================================================
+   تنسيقات شاشة التحميل المحدثة: مسح كامل بخط أسود صريح مستقيم من اليمين لليسار
+   ========================================================================== */
+#splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.splash-black-bar {
+  position: absolute;
+  top: 0;
+  right: -150px;
+  width: 120px;
+  height: 100%;
+  background-color: #000000;
+  z-index: 10;
+}
+
+#splash-screen.slide-away {
+  animation: sweepBackground 0.3s steps(15) forwards;
+}
+
+#splash-screen.slide-away .splash-black-bar {
+  animation: sweepLine 0.3s steps(15) forwards;
+}
+
+#splash-screen.slide-away .splash-content {
+  animation: fadeContent 0.15s linear forwards;
+}
+
+@keyframes sweepLine {
+  0% { right: -150px; }
+  100% { right: calc(100% + 150px); }
+}
+
+@keyframes sweepBackground {
+  0% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+  100% { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
+}
+
+@keyframes fadeContent {
+  to { opacity: 0; transform: scale(0.9); }
+}
+
+.splash-content {
+  text-align: center;
+  z-index: 1;
+}
+
+.splash-pixel-art {
+  font-size: 5rem;
+  margin-bottom: 10px;
+}
+
+.splash-text {
+  color: white;
+  font-family: 'PixelArabic', sans-serif;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* ==========================================================================
+   شريط التنقل الزجاجي المطور (Apple Light-Glass Capsule Navbar)
+   ========================================================================== */
+.advanced-navbar {
+  position: fixed;
+  top: 15px; /* يطفو قليلاً عن أعلى الشاشة ليظهر شكل الكبسولة الزجاجية الفخم */
+  left: 50%;
+  transform: translateX(-50%); /* لجعله متمركزاً في المنتصف تماماً */
+  width: 92%; /* يترك مسافة جانبية أنيقة متساوية من الطرفين */
+  max-width: 1200px;
+  
+  /* خلفية زجاجية بيضاء شبه شفافة ناعمة مستوحاة من أسلوب آبل */
+  background: rgba(255, 255, 255, 0.45); 
+  
+  /* تشتيت وغباش قوي جداً للعناصر التي تمر خلف الشريط */
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  
+  /* حواف دائرية كاملة تعطي مظهر الكبسولة */
+  border-radius: 50px;
+  
+  /* حدود بيضاء مضيئة ومحددة تحاكي لمعان حافة الزجاج الحقيقي */
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  box-sizing: border-box;
+  z-index: 9999;
+  
+  /* ظلال ناعمة خفيفة لتعميق البعد البصري فوق المحتوى المتغير خلفه */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08),
+              inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+/* الجهة اليسرى: الشعار والاسم بداخل الكبسولة */
+.nav-brand-side {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-avatar {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+  border-radius: 6px;
+}
+
+.nav-logo-text {
+  color: #1a1a1a; /* لون داكن ليبرز وضوحه بصورة مثالية فوق الزجاج الفاتح */
+  font-family: 'PixelArabic', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+/* الجهة اليمنى: القائمة ومواقع التواصل */
+.nav-menu-side {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-links-group {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link-item {
+  color: #4a4a4a; /* لون رمادي داكن هادئ يتناسب مع هوية التصميم الزجاجي */
+  text-decoration: none;
+  font-size: 1rem;
+  font-family: 'PixelArabic', sans-serif;
+  transition: all 0.2s ease;
+  position: relative;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* حركات التفاعل والزر النشط بداخل الكبسولة */
+.nav-link-item:hover {
+  color: #000000;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.nav-link-item.active {
+  color: #ffffff;
+  background: #1a1a1a; /* تمييز الزر المفتوح حالياً بخلفية صلبة داكنة متناسقة */
+}
+
+/* مجموعة التواصل الاجتماعي المدمجة داخل الـ Navbar */
+.nav-social-group {
+  display: flex;
+  gap: 12px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  padding-right: 15px;
+}
+
+.nav-social-icon {
+  color: #4a4a4a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.nav-social-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.nav-social-icon:hover {
+  color: #000000;
+  transform: scale(1.1);
+}
+
+/* ==========================================================================
+   المعرض المتراص الحر والتلقائي (Masonry) - خلفية شفافة بالكامل
+   ========================================================================== */
+.gallery-wrapper-bg {
+  background: transparent;
+  width: 100%;
+  padding: 30px 0;
+  margin-top: 20px;
+}
+
+.gallery-grid-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.gallery-grid {
+  column-count: 3; 
+  column-gap: 8px;
+}
+
+.gallery-card {
+  break-inside: avoid;
+  margin-bottom: 8px;
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.gallery-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  image-rendering: pixelated;
+  border-radius: 0px;
+  transition: transform 0.2s ease;
+}
+
+.gallery-card img:hover {
+  transform: scale(1.02);
+}
+
+/* استعلامات الاستجابة والتوافق مع مقاسات الشاشات المتنوعة (Responsive) */
+@media (max-width: 900px) {
+  .advanced-navbar { width: 95%; padding: 10px 20px; top: 10px; }
+  .nav-menu-side { gap: 15px; }
+}
+
+@media (max-width: 768px) {
+  .gallery-grid { column-count: 2; }
+  .nav-social-group { display: none; }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid { column-count: 1; }
+  .nav-links-group { gap: 5px; }
+  .nav-link-item { font-size: 0.9rem; padding: 4px 8px; }
+}
+
+/* ==========================================================================
+   تنسيقات بقية عناصر الموقع الأصلية الخاصة بك (ضبط منطق تراص الأبعاد البكسلية)
+   ========================================================================== */
+@keyframes bg-scrolling {
+  0% { background-position: 0 0; }
+  100% { background-position: 250px 250px; }
+}
+
+@keyframes titleFloatAndRotate {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
+}
+
+@keyframes titleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes scroll-infinite {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); } 
+}
+
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  margin: 0; padding: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2 )), 
+              url('https://img.itch.zone/aW1nLzI0NzQ2NzM3LnBuZw==/original/dzRs3r.png');
+  background-repeat: repeat; background-size: 250px; background-attachment: fixed;
+  animation: bg-scrolling 10s linear infinite;
+  font-family: 'PixelArabic', sans-serif;
+  direction: rtl; overflow-x: hidden;
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+
+/* 🌟 تم زيادة الـ padding العلوي هنا لمنع كبسولة الـ Navbar الطافية من تغطية عناوين الصفحات */
+.header-section { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  padding-top: 140px; /* نزول كافٍ لمنح شريط التنقل مساحة مريحة للطفو */
+  padding-bottom: 20px; 
+  z-index: 10; 
+}
+
+h1 {
+  font-size: 3.2em; color: white; margin: 10px 0;
+  text-shadow: 4px 4px 0px #000;
+  animation: titleFloatAndRotate 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+.desc { color: white; text-align: center; margin-bottom: 30px; line-height: 1.6; }
+
+.social-links { display: flex; gap: 15px; margin-bottom: 30px; justify-content: center; }
+.social-btn {
+  cursor: pointer; height: 55px; width: 55px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 14px; overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 2px solid #fff;
+  animation: titleFloat 4s ease-in-out infinite;
+  text-decoration: none; padding: 0 12px; box-sizing: border-box;
+}
+
+#discord { background-color: #6367E9; }
+#github  { background-color: #16181B; }
+#itch    { background-color: #DD6660; }
+#instagram { background-color: #E4405F; }
+
+.social-btn:hover { width: 165px; transform: scale(1.05); gap: 15px; justify-content: flex-start; }
+.social-btn span { width: 0; opacity: 0; overflow: hidden; transition: 0.4s; font-weight: bold; color: white; white-space: nowrap; }
+.social-btn:hover span { width: auto; opacity: 1; }
+.social-btn svg, .social-btn img { height: 28px; width: 28px; flex-shrink: 0; }
+
+/* 🌟 الحفاظ التام والمنظم على التراص البكسلي للرسمات */
+.top-ground-divider {
+  width: 100vw; 
+  height: 400px;
+  background-image: url('top-ground.png');
+  background-size: auto 100%; 
+  background-repeat: repeat-x;
+  background-position: bottom; 
+  image-rendering: pixelated;
+  z-index: 5; 
+  position: relative;
+  margin-top: 0;
+}
+
+.main-content-area {
+  width: 100vw;
+  background-image: url('bottom-ground.png');
+  background-repeat: repeat;
+  background-size: auto; 
+  image-rendering: pixelated;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  padding: 60px 0; 
+  flex-grow: 1; 
+  margin-top: -4px; /* سحب بكسلي بمقدار -4px يمنع ظهور خطوط الفراغات بين رسمتي الأرضية تماماً */
+}
+
+.section-title {
+  width: 90%; max-width: 800px; color: white; text-align: right;
+  border-right: 8px solid #ffbf00; padding-right: 20px; margin-bottom: 30px;
+}
+
+.portfolio-container { width: 100%; overflow: hidden; padding: 20px 0; }
+.portfolio-scroll-track {
+  display: flex; gap: 0; width: max-content;
+  animation: scroll-infinite 25s linear infinite;
+}
+
+.portfolio-item { 
+  width: 300px; height: 300px; flex-shrink: 0;
+  transition: transform 0.3s ease; cursor: zoom-in;
+}
+.portfolio-item:hover { transform: scale(1.05); z-index: 10; }
+.portfolio-item img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+
+/* Lightbox Styling */
+.lightbox {
+  display: none; position: fixed; z-index: 1000;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.9);
+  justify-content: center; align-items: center;
+}
+.lightbox-container {
+  position: relative; width: 90%; max-width: 900px;
+  background: #1a1a1a; border-radius: 12px;
+  display: flex; flex-direction: row-reverse; overflow: hidden;
+}
+.lightbox-img-side { flex: 1.5; background: #000; display: flex; align-items: center; justify-content: center; height: 500px; }
+.lightbox-img-side img { max-width: 100%; max-height: 100%; image-rendering: pixelated; }
+.lightbox-info-side { flex: 1; padding: 40px; color: white; }
+.close-lightbox { position: absolute; top: 20px; left: 20px; color: white; font-size: 30px; cursor: pointer; }
+
+/* Copy Notification */
+#copy-modal {
+  visibility: hidden; opacity: 0; position: fixed; bottom: 30px; left: 50%;
+  transform: translateX(-50%); background: #ffbf00; color: #000; padding: 10px 25px;
+  border-radius: 8px; transition: 0.3s; z-index: 100;
+}
+#copy-modal.show { visibility: visible; opacity: 1; }
